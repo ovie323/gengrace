@@ -34,7 +34,7 @@ const features = [
 
 const Home3 = () => {
   return (
-    <section className="bg-[#F9F7F4] py-20 px-6">
+    <section className="bg-[#F9F7F4] py-20 px-6"> 
       <div className="max-w-6xl mx-auto text-center mb-14">
         <h2 className="text-3xl md:text-4xl font-bold text-[#3B1E0E] tracking-tight mb-3">
           Why Choose <span className="text-[#C7A86D]">GenGrace Ventures</span>
