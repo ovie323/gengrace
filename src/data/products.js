@@ -1,0 +1,155 @@
+import beads from "../assets/beads.jpg";
+import buttons from "../assets/buttons.jpg";
+import crepe from "../assets/CREPE.jpg";
+import dutchess from "../assets/DUTCHESS.jpg";
+import ELASTIC from "../assets/ELASTIC.jpg";
+import mikado from "../assets/MIKADO.jpg";
+import scissors from "../assets/SCISSORS.jpg";
+import thread from "../assets/Threads.jpg";
+import beilnet from "../assets/VEIL NET.jpg";
+import VINTAGE from "../assets/VINTAGE.jpg";
+import LACEMOUTH from "../assets/LACE MOUTH.jpg";
+import VELVETBIAS from "../assets/VELVET BIAS.jpg";
+
+export const productCategories = [
+  { id: "all", name: "All Products", icon: "🧵" },
+  { id: "fabrics", name: "Fabrics", icon: "🧶" },
+  { id: "threads", name: "Threads", icon: "🧵" },
+  { id: "accessories", name: "Accessories", icon: "📎" },
+  { id: "tools", name: "Tools", icon: "✂️" },
+];
+
+export const products = [
+  {
+    id: 1,
+    name: "Premium Beads",
+    category: "accessories",
+    price: 1500,
+    image: beads,
+    description: "High-quality decorative beads for embellishments",
+    inStock: true,
+    rating: 4.8,
+    reviews: 24,
+  },
+  {
+    id: 2,
+    name: "Designer Buttons",
+    category: "accessories",
+    price: 800,
+    image: buttons,
+    description: "Elegant button collection for shirts, coats, and dresses",
+    inStock: true,
+    rating: 4.9,
+    reviews: 18,
+  },
+  {
+    id: 3,
+    name: "Crepe Fabric",
+    category: "fabrics",
+    price: 3200,
+    image: crepe,
+    description: "Lightweight crepe fabric perfect for flowing garments",
+    inStock: true,
+    rating: 4.7,
+    reviews: 31,
+  },
+  {
+    id: 4,
+    name: "Dutchess Satin",
+    category: "fabrics",
+    price: 4500,
+    image: dutchess,
+    description: "Luxurious dutchess satin for formal wear",
+    inStock: true,
+    rating: 4.6,
+    reviews: 12,
+  },
+  {
+    id: 5,
+    name: "Elastic Bands",
+    category: "accessories",
+    price: 600,
+    image: ELASTIC,
+    description: "Durable elastic bands for waistbands and cuffs",
+    inStock: true,
+    rating: 4.9,
+    reviews: 27,
+  },
+  {
+    id: 6,
+    name: "Mikado Fabric",
+    category: "fabrics",
+    price: 5200,
+    image: mikado,
+    description: "Premium mikado fabric for structured garments",
+    inStock: true,
+    rating: 4.5,
+    reviews: 45,
+  },
+  {
+    id: 7,
+    name: "Professional Scissors",
+    category: "tools",
+    price: 2800,
+    image: scissors,
+    description: "Sharp, durable scissors for precise fabric cutting",
+    inStock: true,
+    rating: 4.9,
+    reviews: 56,
+  },
+  {
+    id: 8,
+    name: "Quality Thread",
+    category: "threads",
+    price: 400,
+    image: thread,
+    description: "Strong polyester thread in various colors",
+    inStock: true,
+    rating: 4.4,
+    reviews: 38,
+  },
+  {
+    id: 9,
+    name: "Veil Net Fabric",
+    category: "fabrics",
+    price: 3800,
+    image: beilnet,
+    description: "Elegant veil net fabric for special occasions",
+    inStock: true,
+    rating: 4.7,
+    reviews: 22,
+  },
+  {
+    id: 10,
+    name: "Vintage Lace",
+    category: "fabrics",
+    price: 4200,
+    image: VINTAGE,
+    description: "Beautiful vintage lace for bridal and formal wear",
+    inStock: true,
+    rating: 4.8,
+    reviews: 33,
+  },
+  {
+    id: 11,
+    name: "Lace Mouth Fabric",
+    category: "fabrics",
+    price: 4800,
+    image: LACEMOUTH,
+    description: "Delicate lace mouth fabric for intricate designs",
+    inStock: true,
+    rating: 4.9,
+    reviews: 28,
+  },
+  {
+    id: 12,
+    name: "Velvet Bias",
+    category: "fabrics",
+    price: 5500,
+    image: VELVETBIAS,
+    description: "Premium velvet bias for luxurious finishing touches",
+    inStock: true,
+    rating: 4.8,
+    reviews: 19,
+  },
+];
