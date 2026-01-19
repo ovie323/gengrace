@@ -6,7 +6,7 @@ import Mainproduct from './UI/PRODUCT/Mainproduct'
 import MainContact from './UI/CONTACT/MainContact'
 import Header from './Constant/Header'
 import Footer from './Constant/Footer'
-import MainTrack from './UI/TRACK/MainTrack'
+import MainTrack from './UI/TRACK/Maintrack'
 import { SearchProvider } from './UI/Context/Searchcontext'
 import { CartProvider } from './UI/Context/CartContext'
 
