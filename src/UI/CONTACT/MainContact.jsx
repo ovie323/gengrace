@@ -2,7 +2,7 @@ import React from 'react'
 import Support1 from './Contact1'
 import Support2 from './Contact2'
 
-function Mainsupport() {
+function MainContact() {
   return (
     <div>
 
@@ -15,4 +15,4 @@ function Mainsupport() {
   )
 }
 
-export default Mainsupport
+export default MainContact
