@@ -10,7 +10,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSearch } from "../UI/Context/Searchcontext";
 import { useCart } from "../UI/Context/CartContext";
 import Cart from "../UI/CART/Cart";
-import COMPANYLOGO from "../assets/COMPANY LOGO.PNG";
+import COMPANYLOGO from "../assets/LOGO.png";
 
 const Header = () => {
   const { searchTerm, setSearchTerm } = useSearch();
