@@ -100,7 +100,7 @@ const Header = () => {
             </button>
 
             <a
-              href="https://wa.me/2348012345678"
+              href="https://wa.me/2348024344396"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-[#E3C98C] transition-colors duration-200"
@@ -193,7 +193,7 @@ const Header = () => {
 
 
               <a
-                href="https://wa.me/2348012345678"
+                href="https://wa.me/2348024344396"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-[#E3C98C] transition-colors duration-200"
