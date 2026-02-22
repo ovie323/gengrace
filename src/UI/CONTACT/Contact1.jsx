@@ -45,7 +45,7 @@ const Contact1 = () => {
       console.error('Error:', error);
       // Fallback to WhatsApp if backend is not available
       const whatsappMessage = encodeURIComponent(`Hi GenGrace Ventures! \n\nName: ${formData.name}\nEmail: ${formData.email}\nMessage: ${formData.message}`);
-      window.open(`https://wa.me/2348024344396?text=${whatsappMessage}`, '_blank');
+      window.open(`https://wa.me/+2348188594189?text=${whatsappMessage}`, '_blank');
       setSubmitMessage('Redirected to WhatsApp since server is unavailable.');
       setFormData({ name: '', email: '', subject: '', message: '' });
     }
@@ -159,7 +159,7 @@ const Contact1 = () => {
             gengraceventures@gmail.com
           </a>
         </p>
-        <p>💬 WhatsApp: <a href="https://wa.me/2348024344396" target="_blank" rel="noopener noreferrer" className="underline text-[#1B2A4E] hover:text-[#3B4D7A]">Chat with us</a></p>
+        <p>💬 WhatsApp: <a href="https://wa.me/+2348188594189" target="_blank" rel="noopener noreferrer" className="underline text-[#1B2A4E] hover:text-[#3B4D7A]">Chat with us</a></p>
       </div>
     </div>
   );

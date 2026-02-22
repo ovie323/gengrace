@@ -4,7 +4,7 @@ import { products } from "../../data/products";
 
 const Hom2 = () => {
   // Replace with your actual WhatsApp number (include country code, no + or spaces)
-  const whatsappNumber = "2349012345678"; // Example: 2349012345678 for +234 901 234 5678
+  const whatsappNumber = "+2348188594189"; // Example: 2349012345678 for +234 901 234 5678
   const message = encodeURIComponent("Hello GenGrace Ventures! I’d like to buy some tailoring materials.");
 
 

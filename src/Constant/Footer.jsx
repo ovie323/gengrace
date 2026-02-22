@@ -85,11 +85,11 @@ const Footer = () => {
           <ul className="space-y-2 text-sm">
             <li className="flex items-center space-x-2">
               <Phone size={16} className="text-[#C7A86D]" />
-              <span>+234 812 646 6789</span>
+              <span>+2348188594189</span>
             </li>
             <li className="flex items-center space-x-2">
               <MessageCircle size={16} className="text-[#C7A86D]" />
-              <span>WhatsApp: +234 812 345 6789</span>
+              <span>WhatsApp: +2348188594189</span>
             </li>
             <li className="flex items-center space-x-2">
               <Mail size={16} className="text-[#C7A86D]" />

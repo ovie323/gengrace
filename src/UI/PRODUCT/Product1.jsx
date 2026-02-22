@@ -8,7 +8,7 @@ const Product1 = () => {
   const { searchTerm } = useSearch();
   const { addToCart } = useCart();
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const whatsappNumber = "2349012345678";
+  const whatsappNumber = "+2348188594189";
 
   const filteredProducts = products.filter((p) => {
     const matchesSearch = p.name.toLowerCase().includes(searchTerm.toLowerCase());

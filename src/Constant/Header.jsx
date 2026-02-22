@@ -13,7 +13,7 @@ import Cart from "../UI/CART/Cart";
 import COMPANYLOGO from "../assets/LOGO.png";
 
 const Header = () => {
-  // WhatsApp: +2348024344396
+  // WhatsApp: +2348188594189
   const { searchTerm, setSearchTerm } = useSearch();
   const { getTotalItems } = useCart();
   const [showSearch, setShowSearch] = useState(false);
