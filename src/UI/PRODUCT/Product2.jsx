@@ -106,7 +106,7 @@ const Product2 = () => {
   const { searchTerm } = useSearch();
   const { addToCart } = useCart();
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const whatsappNumber = "+2348188594189";
+  const whatsappNumber = "+2348024344396";
 
   const filteredProducts = product2Items.filter((p) => {
     const matchesSearch = p.name.toLowerCase().includes(searchTerm.toLowerCase());
