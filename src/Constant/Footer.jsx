@@ -7,10 +7,10 @@ const WHATSAPP = "2348024344396";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#06090F] border-t border-white/5">
+    <footer className="bg-[#FAF7F4] border-t border-[#E8DDD0]">
 
       {/* Top CTA band */}
-      <div className="border-b border-white/5">
+      <div className="bg-[#1E2A38] border-b border-[#2A3A4A]">
         <div className="max-w-7xl mx-auto px-6 md:px-10 py-10 flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
             <p className="text-[#C7A86D] text-xs font-semibold tracking-[0.3em] uppercase mb-1">Ready to order?</p>
@@ -23,14 +23,14 @@ const Footer = () => {
               href={`https://wa.me/${WHATSAPP}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-[#C7A86D] hover:bg-[#b7924f] text-white text-sm font-semibold px-6 py-3 rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-[#C7A86D]/20"
+              className="inline-flex items-center gap-2 bg-[#C7A86D] hover:bg-[#b7924f] text-white text-sm font-semibold px-6 py-3 rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-[#C7A86D]/30"
             >
               <MessageCircle size={15} />
               Chat on WhatsApp
             </a>
             <Link
               to="/Mainproduct"
-              className="inline-flex items-center gap-2 border border-white/10 hover:border-[#C7A86D]/40 text-gray-400 hover:text-white text-sm font-semibold px-6 py-3 rounded-full transition-all duration-300"
+              className="inline-flex items-center gap-2 border border-white/20 hover:border-[#C7A86D] text-white hover:text-[#C7A86D] text-sm font-semibold px-6 py-3 rounded-full transition-all duration-300"
             >
               Browse Products
             </Link>
@@ -38,28 +38,29 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Main footer grid */}
+      {/* Main footer */}
       <div className="max-w-7xl mx-auto px-6 md:px-10 py-14 grid grid-cols-1 md:grid-cols-12 gap-10">
 
-        {/* Brand — wider column */}
+        {/* Brand */}
         <div className="md:col-span-4">
           <Link to="/" className="flex items-center gap-3 mb-5 group w-fit">
-            <div className="w-10 h-10 rounded-xl overflow-hidden ring-1 ring-[#C7A86D]/30 group-hover:ring-[#C7A86D]/60 transition-all duration-300">
+            <div className="w-10 h-10 rounded-xl overflow-hidden ring-1 ring-[#C7A86D]/40 group-hover:ring-[#C7A86D] transition-all duration-300">
               <img src={LOGO} alt="Logo" className="w-full h-full object-cover" />
             </div>
             <div className="flex flex-col leading-none">
-              <span className="text-white font-bold text-base">GenGrace</span>
-              <span className="text-[#C7A86D] text-[10px] tracking-[0.25em] uppercase font-medium">Ventures</span>
+              <span className="text-[#1A1A2E] font-bold text-base">GenGrace</span>
+              <span className="text-[#C7A86D] text-[10px] tracking-[0.25em] uppercase font-semibold">Ventures</span>
             </div>
           </Link>
-          <p className="text-gray-500 text-sm leading-relaxed mb-5 max-w-xs">
+
+          <p className="text-[#6B7280] text-sm leading-relaxed mb-5 max-w-xs">
             Premium tailoring materials — fabrics, threads, tools, and accessories — trusted by professionals and fashion lovers across Nigeria.
           </p>
-          <p className="text-[#C7A86D]/50 text-xs italic border-l-2 border-[#C7A86D]/20 pl-3">
+
+          <p className="text-[#C7A86D]/80 text-xs italic border-l-2 border-[#C7A86D]/30 pl-3 text-[#8B7355]">
             "Quality Tailoring Materials You Can Trust."
           </p>
 
-          {/* Socials */}
           <div className="flex gap-3 mt-6">
             {[
               { href: "https://facebook.com", Icon: Facebook, label: "Facebook" },
@@ -72,7 +73,7 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="w-9 h-9 rounded-xl bg-white/4 border border-white/8 flex items-center justify-center text-gray-500 hover:text-[#C7A86D] hover:border-[#C7A86D]/40 hover:bg-[#C7A86D]/5 transition-all duration-200"
+                className="w-9 h-9 rounded-xl bg-white border border-[#E8DDD0] flex items-center justify-center text-[#9CA3AF] hover:text-[#C7A86D] hover:border-[#C7A86D]/50 hover:shadow-md transition-all duration-200"
               >
                 <Icon size={15} />
               </a>
@@ -80,12 +81,11 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Spacer */}
         <div className="hidden md:block md:col-span-1" />
 
         {/* Quick Links */}
         <div className="md:col-span-3">
-          <h4 className="text-white text-xs font-semibold uppercase tracking-[0.2em] mb-6">Navigation</h4>
+          <h4 className="text-[#1A1A2E] text-xs font-bold uppercase tracking-[0.2em] mb-6">Navigation</h4>
           <ul className="space-y-3">
             {[
               { name: "Home", path: "/" },
@@ -97,7 +97,7 @@ const Footer = () => {
               <li key={link.name}>
                 <Link
                   to={link.path}
-                  className="group flex items-center gap-1.5 text-gray-500 hover:text-[#C7A86D] text-sm transition-colors duration-200"
+                  className="group flex items-center gap-1.5 text-[#6B7280] hover:text-[#C7A86D] text-sm transition-colors duration-200"
                 >
                   <span>{link.name}</span>
                   <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
@@ -109,7 +109,7 @@ const Footer = () => {
 
         {/* Contact */}
         <div className="md:col-span-4">
-          <h4 className="text-white text-xs font-semibold uppercase tracking-[0.2em] mb-6">Contact</h4>
+          <h4 className="text-[#1A1A2E] text-xs font-bold uppercase tracking-[0.2em] mb-6">Contact</h4>
           <ul className="space-y-4">
             {[
               { Icon: Phone, text: "+2348024344396", href: "tel:+2348024344396" },
@@ -118,7 +118,7 @@ const Footer = () => {
               { Icon: MapPin, text: "12 Tailors Street, Lagos, Nigeria" },
             ].map((item, i) => (
               <li key={i} className="flex items-start gap-3">
-                <div className="w-7 h-7 rounded-lg bg-[#C7A86D]/8 border border-[#C7A86D]/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <div className="w-7 h-7 rounded-lg bg-[#F5EDE0] border border-[#E8DDD0] flex items-center justify-center flex-shrink-0 mt-0.5">
                   <item.Icon size={13} className="text-[#C7A86D]" />
                 </div>
                 {item.href ? (
@@ -126,12 +126,12 @@ const Footer = () => {
                     href={item.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-500 hover:text-[#C7A86D] text-sm transition-colors duration-200 leading-relaxed"
+                    className="text-[#6B7280] hover:text-[#C7A86D] text-sm transition-colors duration-200 leading-relaxed"
                   >
                     {item.text}
                   </a>
                 ) : (
-                  <span className="text-gray-500 text-sm leading-relaxed">{item.text}</span>
+                  <span className="text-[#6B7280] text-sm leading-relaxed">{item.text}</span>
                 )}
               </li>
             ))}
@@ -140,12 +140,12 @@ const Footer = () => {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-white/5">
+      <div className="border-t border-[#E8DDD0] bg-[#F5EDE0]/40">
         <div className="max-w-7xl mx-auto px-6 md:px-10 py-5 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <p className="text-gray-600 text-xs">
+          <p className="text-[#9CA3AF] text-xs">
             © {new Date().getFullYear()} GenGrace Ventures. All Rights Reserved.
           </p>
-          <p className="text-gray-700 text-xs">
+          <p className="text-[#C7A86D]/60 text-xs font-medium">
             Crafted with care · Lagos, Nigeria
           </p>
         </div>
