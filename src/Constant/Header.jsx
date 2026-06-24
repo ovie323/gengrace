@@ -1,22 +1,22 @@
 import React, { useState, useEffect, useRef } from "react";
-import {
-  ShoppingCart,
-  Search,
-  MessageCircle,
-  Menu,
-  X,
-} from "lucide-react";
+import { ShoppingCart, Search, MessageCircle, Menu, X } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSearch } from "../UI/Context/Searchcontext";
 import { useCart } from "../UI/Context/CartContext";
 import Cart from "../UI/CART/Cart";
 import COMPANYLOGO from "../assets/LOGO.png";
 
+const navItems = [
+  { name: "Home", path: "/" },
+  { name: "Products", path: "/Mainproduct" },
+  { name: "Track Order", path: "/Maintrack" },
+  { name: "About Us", path: "/Mainabout" },
+  { name: "Contact", path: "/MainContact" },
+];
+
 const Header = () => {
-  // WhatsApp: +2348188594189
   const { searchTerm, setSearchTerm } = useSearch();
   const { getTotalItems } = useCart();
-  const [showSearch, setShowSearch] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -25,20 +25,10 @@ const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const handleSearch = (e) => {
-    if (e.key === 'Enter' || e.type === 'click') {
-      if (searchTerm.trim()) {
-        navigate('/Mainproduct');
-        setSearchOpen(false);
-        setShowSearch(false);
-      }
-    }
-  };
-
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
@@ -47,181 +37,207 @@ const Header = () => {
   }, [location]);
 
   useEffect(() => {
-    if (searchOpen && searchInputRef.current) {
-      searchInputRef.current.focus();
-    }
+    if (searchOpen) searchInputRef.current?.focus();
   }, [searchOpen]);
 
-  const navItems = [
-    { name: "Home", path: "/" },
-    { name: "Product", path: "/Mainproduct" },
-    { name: "Track", path: "/Maintrack" },
-    { name: "About Us", path: "/Mainabout" },
-    { name: "Contact", path: "/MainContact" },
-  ];
+  // lock body scroll when mobile menu open
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [menuOpen]);
+
+  const handleSearch = (e) => {
+    if (e.key === "Enter" || e.type === "click") {
+      if (searchTerm.trim()) {
+        navigate("/Mainproduct");
+        setSearchOpen(false);
+      }
+    }
+  };
+
+  const cartCount = getTotalItems();
 
   return (
     <>
-      {/* Header */}
       <header
-        className="fixed top-0 left-0 w-full z-50 bg-[#1E2A38]/95 backdrop-blur-md shadow-md text-white transition-all duration-500"
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
+          scrolled
+            ? "bg-[#06090F]/95 backdrop-blur-xl border-b border-white/5 shadow-2xl shadow-black/20"
+            : "bg-transparent"
+        }`}
       >
-        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+        <div className="max-w-7xl mx-auto px-6 md:px-10 flex items-center justify-between h-20">
+
           {/* Logo */}
-          <Link
-            to="/"
-            className="text-[#C7A86D] font-bold text-xl tracking-wide hover:text-[#E3C98C] transition-colors duration-200 flex items-center gap-2"
-          >
-            <img src={COMPANYLOGO} alt="Company Logo" className="h-12 w-12" />
-            GenGrace Ventures
+          <Link to="/" className="flex items-center gap-3 group flex-shrink-0">
+            <div className="w-9 h-9 rounded-xl overflow-hidden ring-1 ring-[#C7A86D]/30 group-hover:ring-[#C7A86D]/70 transition-all duration-300">
+              <img src={COMPANYLOGO} alt="Logo" className="w-full h-full object-cover" />
+            </div>
+            <div className="flex flex-col leading-none">
+              <span className="text-white font-bold text-sm tracking-wide">GenGrace</span>
+              <span className="text-[#C7A86D] text-[10px] tracking-[0.2em] uppercase font-medium">Ventures</span>
+            </div>
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex space-x-8 text-sm font-medium">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                to={item.path}
-                className={`transition-colors duration-200 text-white hover:text-[#E3C98C] ${
-                  location.pathname === item.path ? "text-[#E3C98C]" : ""
-                }`}
-              >
-                {item.name}
-              </Link>
-            ))}
+          <nav className="hidden md:flex items-center gap-8">
+            {navItems.map((item) => {
+              const active = location.pathname === item.path;
+              return (
+                <Link
+                  key={item.name}
+                  to={item.path}
+                  className="relative text-sm font-medium group"
+                >
+                  <span className={`transition-colors duration-200 ${active ? "text-[#C7A86D]" : "text-gray-400 group-hover:text-white"}`}>
+                    {item.name}
+                  </span>
+                  <span className={`absolute -bottom-1 left-0 h-px bg-[#C7A86D] transition-all duration-300 ${active ? "w-full" : "w-0 group-hover:w-full"}`} />
+                </Link>
+              );
+            })}
           </nav>
 
-          {/* Desktop Icons */}
-          <div className="hidden md:flex items-center space-x-4">
+          {/* Right actions */}
+          <div className="flex items-center gap-1">
+            {/* Search */}
             <button
               onClick={() => setSearchOpen(!searchOpen)}
-              className="hover:text-[#E3C98C] transition-colors duration-200"
+              className="w-9 h-9 flex items-center justify-center rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition-all duration-200"
             >
-              <Search size={20} />
+              <Search size={18} />
             </button>
 
+            {/* WhatsApp */}
             <a
               href="https://wa.me/2348024344396"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-[#E3C98C] transition-colors duration-200"
+              className="w-9 h-9 hidden md:flex items-center justify-center rounded-xl text-gray-400 hover:text-green-400 hover:bg-white/5 transition-all duration-200"
             >
-              <MessageCircle size={20} />
+              <MessageCircle size={18} />
             </a>
 
-            <button 
+            {/* Cart */}
+            <button
               onClick={() => setCartOpen(true)}
-              className="hover:text-[#E3C98C] transition-colors duration-200 relative"
+              className="w-9 h-9 flex items-center justify-center rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition-all duration-200 relative"
             >
-              <ShoppingCart size={22} />
-              {getTotalItems() > 0 && (
-                <span className="absolute -top-1 -right-2 bg-[#C7A86D] text-[#1E2A38] text-xs font-bold px-1.5 rounded-full">
-                  {getTotalItems()}
+              <ShoppingCart size={18} />
+              {cartCount > 0 && (
+                <span className="absolute top-1 right-1 w-4 h-4 bg-[#C7A86D] text-[#06090F] text-[9px] font-bold rounded-full flex items-center justify-center">
+                  {cartCount}
                 </span>
               )}
             </button>
-          </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden text-[#C7A86D] focus:outline-none"
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            {menuOpen ? <X size={26} /> : <Menu size={26} />}
-          </button>
+            {/* Mobile hamburger */}
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="md:hidden w-9 h-9 flex items-center justify-center rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition-all duration-200 ml-1"
+            >
+              {menuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
         </div>
 
-        {/* Search Bar */}
-        {searchOpen && (
-          <div className="bg-[#EADDCB] text-[#1E2A38] px-6 py-3 shadow-inner transition-all duration-500">
-            <div className="max-w-3xl mx-auto flex items-center">
+        {/* Search dropdown */}
+        <div className={`overflow-hidden transition-all duration-400 ${searchOpen ? "max-h-20 opacity-100" : "max-h-0 opacity-0"}`}>
+          <div className="bg-[#06090F]/95 backdrop-blur-xl border-t border-white/5 px-6 md:px-10 py-3">
+            <div className="max-w-2xl mx-auto flex gap-3">
               <input
                 ref={searchInputRef}
                 type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                onKeyPress={handleSearch}
-                placeholder="Search for tailoring materials..."
-                className="flex-1 bg-white text-gray-800 rounded-full px-4 py-2 focus:outline-none border border-[#C7A86D] placeholder-gray-500"
+                onKeyDown={handleSearch}
+                placeholder="Search for fabrics, threads, tools..."
+                className="flex-1 bg-white/5 border border-white/10 focus:border-[#C7A86D]/50 text-white placeholder-gray-600 text-sm px-4 py-2.5 rounded-xl outline-none transition-colors duration-200"
               />
               <button
                 onClick={handleSearch}
-                className="ml-2 bg-[#C7A86D] text-white px-4 py-2 rounded-full hover:bg-[#b7924f] transition"
+                className="bg-[#C7A86D] hover:bg-[#b7924f] text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-colors duration-200"
               >
                 Search
               </button>
-
-
             </div>
           </div>
-        )}
+        </div>
+      </header>
 
-        {/* Mobile Dropdown */}
-        {menuOpen && (
-          <div className="md:hidden bg-[#1E2A38]/95 backdrop-blur-md border-t border-[#C7A86D] px-6 py-4 space-y-4 text-sm font-medium transition-all duration-300">
-            {navItems.map((item) => (
+      {/* Spacer — only when not on homepage (hero handles its own spacing) */}
+      {location.pathname !== "/" && <div className="h-20" />}
+
+      {/* Full-screen mobile menu */}
+      <div
+        className={`fixed inset-0 z-40 bg-[#06090F] flex flex-col transition-all duration-500 md:hidden ${
+          menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
+      >
+        <div className="flex items-center justify-between px-6 h-20 border-b border-white/5">
+          <Link to="/" className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl overflow-hidden ring-1 ring-[#C7A86D]/30">
+              <img src={COMPANYLOGO} alt="Logo" className="w-full h-full object-cover" />
+            </div>
+            <div className="flex flex-col leading-none">
+              <span className="text-white font-bold text-sm">GenGrace</span>
+              <span className="text-[#C7A86D] text-[10px] tracking-[0.2em] uppercase">Ventures</span>
+            </div>
+          </Link>
+          <button
+            onClick={() => setMenuOpen(false)}
+            className="w-9 h-9 flex items-center justify-center rounded-xl text-gray-400 hover:text-white bg-white/5"
+          >
+            <X size={20} />
+          </button>
+        </div>
+
+        <nav className="flex-1 flex flex-col justify-center px-8 gap-2">
+          {navItems.map((item, i) => {
+            const active = location.pathname === item.path;
+            return (
               <Link
                 key={item.name}
                 to={item.path}
-                className="block text-white hover:text-[#E3C98C] transition"
+                style={{ transitionDelay: menuOpen ? `${i * 60}ms` : "0ms" }}
+                className={`flex items-center justify-between py-4 border-b border-white/5 transition-all duration-300 ${
+                  menuOpen ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4"
+                }`}
               >
-                {item.name}
+                <span className={`text-2xl font-bold tracking-tight ${active ? "text-[#C7A86D]" : "text-white"}`}>
+                  {item.name}
+                </span>
+                {active && <span className="w-2 h-2 rounded-full bg-[#C7A86D]" />}
               </Link>
-            ))}
+            );
+          })}
+        </nav>
 
-            {/* Icons for Mobile */}
-            <div className="flex items-center space-x-4 pt-4 border-t border-gray-600">
-              {/* Search */}
-<div className="relative">
-  <button
-    onClick={() => setShowSearch(!showSearch)}
-    className="hover:text-[#E3C98C] transition-colors duration-200"
-  >
-    <Search size={20} />
-  </button>
+        <div className="px-8 pb-10 flex items-center gap-4">
+          <a
+            href="https://wa.me/2348024344396"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white text-sm font-semibold px-5 py-3 rounded-xl transition-colors duration-200"
+          >
+            <MessageCircle size={16} />
+            WhatsApp Us
+          </a>
+          <button
+            onClick={() => { setCartOpen(true); setMenuOpen(false); }}
+            className="flex items-center gap-2 bg-white/5 border border-white/10 text-white text-sm font-semibold px-5 py-3 rounded-xl transition-colors duration-200 relative"
+          >
+            <ShoppingCart size={16} />
+            Cart
+            {cartCount > 0 && (
+              <span className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-[#C7A86D] text-[#06090F] text-[10px] font-bold rounded-full flex items-center justify-center">
+                {cartCount}
+              </span>
+            )}
+          </button>
+        </div>
+      </div>
 
-  {showSearch && (
-    <input
-      type="text"
-      placeholder="Search products..."
-      value={searchTerm}
-      onChange={(e) => setSearchTerm(e.target.value)}
-      onKeyPress={handleSearch}
-      className="absolute right-0 mt-2 bg-white text-black rounded-md px-3 py-1 text-sm w-48 shadow-lg focus:outline-none"
-    />
-  )}
-</div>
-
-
-              <a
-                href="https://wa.me/2348024344396"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-[#E3C98C] transition-colors duration-200"
-              >
-                <MessageCircle size={20} />
-              </a>
-
-              <button 
-                onClick={() => setCartOpen(true)}
-                className="hover:text-[#E3C98C] transition-colors duration-200 relative"
-              >
-                <ShoppingCart size={22} />
-                {getTotalItems() > 0 && (
-                  <span className="absolute -top-1 -right-2 bg-[#C7A86D] text-[#1E2A38] text-xs font-bold px-1.5 rounded-full">
-                    {getTotalItems()}
-                  </span>
-                )}
-              </button>
-            </div>
-          </div>
-        )}
-      </header>
-
-      {/* Spacer */}
-      <div className="h-20"></div>
-      
-      {/* Cart Modal */}
       <Cart isOpen={cartOpen} onClose={() => setCartOpen(false)} />
     </>
   );
