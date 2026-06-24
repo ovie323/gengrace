@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const WHATSAPP = "2348024344396";
 
 const Hom2 = () => {
-  const featured = products.slice(0, 4);
+  const featured = products.slice(0, 8);
 
   const handleWhatsApp = (product) => {
     const msg = encodeURIComponent(`Hi GenGrace Ventures! I'm interested in ${product.name} (₦${product.price.toLocaleString()}). Can you provide more details?`);
@@ -30,38 +30,38 @@ const Hom2 = () => {
         </div>
 
         {/* Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mb-12">
           {featured.map((product) => (
             <div
               key={product.id}
-              className="group relative bg-[#1A2535] rounded-2xl overflow-hidden border border-white/5 hover:border-[#C7A86D]/40 transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#C7A86D]/10"
+              className="group bg-[#1A2535] rounded-xl overflow-hidden border border-white/5 hover:border-[#C7A86D]/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#C7A86D]/10"
             >
-              <div className="relative overflow-hidden h-52">
+              <div className="relative overflow-hidden h-36">
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1A2535] via-transparent to-transparent" />
-                <div className="absolute top-3 right-3">
-                  <span className="bg-[#C7A86D] text-white text-xs font-semibold px-2.5 py-1 rounded-full">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1A2535]/80 via-transparent to-transparent" />
+                <div className="absolute top-2 right-2">
+                  <span className="bg-[#C7A86D] text-white text-[10px] font-semibold px-2 py-0.5 rounded-full">
                     In Stock
                   </span>
                 </div>
               </div>
 
-              <div className="p-5">
-                <h3 className="text-white font-semibold text-base mb-1">{product.name}</h3>
-                <p className="text-gray-500 text-sm mb-4 line-clamp-2">{product.description}</p>
+              <div className="p-3">
+                <h3 className="text-white font-semibold text-sm mb-0.5 truncate">{product.name}</h3>
+                <p className="text-gray-500 text-xs mb-3 line-clamp-1">{product.description}</p>
                 <div className="flex items-center justify-between">
-                  <span className="text-[#C7A86D] text-xl font-bold">
+                  <span className="text-[#C7A86D] text-sm font-bold">
                     ₦{product.price.toLocaleString()}
                   </span>
                   <button
                     onClick={() => handleWhatsApp(product)}
-                    className="flex items-center gap-1.5 bg-green-600 hover:bg-green-500 text-white text-sm px-3 py-2 rounded-lg transition-colors duration-200"
+                    className="flex items-center gap-1 bg-green-600 hover:bg-green-500 text-white text-xs px-2.5 py-1.5 rounded-lg transition-colors duration-200"
                   >
-                    <MessageCircle size={14} />
+                    <MessageCircle size={11} />
                     Order
                   </button>
                 </div>
