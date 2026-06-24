@@ -1,92 +1,85 @@
 import React from "react";
-import { MessageCircle } from "lucide-react";
+import { MessageCircle, ArrowRight } from "lucide-react";
 import { products } from "../../data/products";
+import { Link } from "react-router-dom";
+
+const WHATSAPP = "2348024344396";
 
 const Hom2 = () => {
-  // Replace with your actual WhatsApp number (include country code, no + or spaces)
-  const whatsappNumber = "+2348188594189"; // Example: 2349012345678 for +234 901 234 5678
-  const message = encodeURIComponent("Hello GenGrace Ventures! I’d like to buy some tailoring materials.");
+  const featured = products.slice(0, 4);
 
-
-  const handleProductWhatsApp = (product) => {
-    const productMessage = encodeURIComponent(`Hi GenGrace Ventures! I'm interested in ${product.name} (₦${product.price.toLocaleString()}). Can you provide more details?`);
-    window.open(`https://wa.me/${whatsappNumber}?text=${productMessage}`, "_blank");
+  const handleWhatsApp = (product) => {
+    const msg = encodeURIComponent(`Hi GenGrace Ventures! I'm interested in ${product.name} (₦${product.price.toLocaleString()}). Can you provide more details?`);
+    window.open(`https://wa.me/${WHATSAPP}?text=${msg}`, "_blank");
   };
-
-  const handleWhatsAppClick = () => {
-    window.open(`https://wa.me/${whatsappNumber}?text=${message}`, "_blank");
-  };
-
-  const featuredProducts = products.slice(0, 5);
 
   return (
-    <section className="bg-gradient-to-b from-[#F8F5F0] to-[#EDE4D8] py-20 px-6">
-      {/* Header */}
-      <div className="max-w-7xl mx-auto text-center mb-14">
-        <h2 className="text-3xl md:text-4xl font-bold text-[#3B1E0E] mb-4 tracking-tight">
-          Our <span className="text-[#C7A86D]">Tailoring Materials</span>
-        </h2>
-        <p className="text-gray-700 text-lg md:text-xl max-w-2xl mx-auto">
-          Handpicked materials to bring your creative designs to life with elegance and quality.
-        </p>
-      </div>
+    <section className="py-24 px-6 bg-[#0F1923]">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <p className="text-[#C7A86D] text-sm font-semibold tracking-[0.3em] uppercase mb-3">
+            Our Collection
+          </p>
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">
+            Featured <span className="text-[#C7A86D]">Materials</span>
+          </h2>
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+            Handpicked materials to bring your creative designs to life with elegance and quality.
+          </p>
+        </div>
 
-      {/* Product Gallery */}
-      <div className="flex flex-wrap justify-center gap-8 mb-10">
-        {featuredProducts.map((product) => (
-          <div
-            key={product.id}
-            className="relative group overflow-hidden rounded-2xl shadow-md hover:shadow-2xl
-                       transform hover:scale-105 transition duration-500 ease-out w-64 bg-white"
-          >
-            <img
-              src={product.image}
-              alt={product.name}
-              className="object-cover w-full h-48 rounded-t-2xl"
-            />
+        {/* Product Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          {featured.map((product) => (
+            <div
+              key={product.id}
+              className="group relative bg-[#1A2535] rounded-2xl overflow-hidden border border-white/5 hover:border-[#C7A86D]/40 transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#C7A86D]/10"
+            >
+              <div className="relative overflow-hidden h-52">
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1A2535] via-transparent to-transparent" />
+                <div className="absolute top-3 right-3">
+                  <span className="bg-[#C7A86D] text-white text-xs font-semibold px-2.5 py-1 rounded-full">
+                    In Stock
+                  </span>
+                </div>
+              </div>
 
-            {/* Product Info */}
-            <div className="p-4">
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">
-                {product.name}
-              </h3>
-              <p className="text-[#C7A86D] font-bold mb-3">
-                ₦{product.price.toLocaleString()}
-              </p>
-              
-              <button
-                onClick={() => handleProductWhatsApp(product)}
-                disabled={!product.inStock}
-                className={`w-full flex items-center justify-center gap-2 py-2 px-4 rounded-lg font-medium transition-colors ${
-                  product.inStock
-                    ? "bg-green-600 text-white hover:bg-green-700"
-                    : "bg-gray-300 text-gray-500 cursor-not-allowed"
-                }`}
-              >
-                <MessageCircle size={16} />
-                {product.inStock ? "Chat on WhatsApp" : "Out of Stock"}
-              </button>
+              <div className="p-5">
+                <h3 className="text-white font-semibold text-base mb-1">{product.name}</h3>
+                <p className="text-gray-500 text-sm mb-4 line-clamp-2">{product.description}</p>
+                <div className="flex items-center justify-between">
+                  <span className="text-[#C7A86D] text-xl font-bold">
+                    ₦{product.price.toLocaleString()}
+                  </span>
+                  <button
+                    onClick={() => handleWhatsApp(product)}
+                    className="flex items-center gap-1.5 bg-green-600 hover:bg-green-500 text-white text-sm px-3 py-2 rounded-lg transition-colors duration-200"
+                  >
+                    <MessageCircle size={14} />
+                    Order
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
 
-      {/* Centered Buttons */}
-      <div className="flex justify-center gap-4">
-        <button
-          onClick={handleWhatsAppClick}
-          className="bg-green-600 text-white text-lg font-medium px-8 py-3 rounded-full 
-                     shadow-md hover:bg-green-700 hover:shadow-lg transition-all duration-300 ease-in-out"
-        >
-          Contact Us
-        </button>
-        <a
-          href="/Mainproduct"
-          className="bg-[#C7A86D] text-white text-lg font-medium px-8 py-3 rounded-full 
-                     shadow-md hover:bg-[#b7924f] hover:shadow-lg transition-all duration-300 ease-in-out"
-        >
-          View All Products
-        </a>
+        {/* CTA */}
+        <div className="flex justify-center">
+          <Link
+            to="/Mainproduct"
+            className="inline-flex items-center gap-2 bg-[#C7A86D] hover:bg-[#b7924f] text-white font-semibold px-8 py-3.5 rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-[#C7A86D]/30"
+          >
+            View All Products
+            <ArrowRight size={18} />
+          </Link>
+        </div>
       </div>
     </section>
   );
